@@ -84,6 +84,23 @@ extension View {
     }
 }
 
+// Challenge
+// Create a custom ViewModifier (and accompanying View extension) that makes a
+// view have a large, blue font suitable for prominent titles in a view.
+struct BlueTitle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .foregroundColor(.blue)
+    }
+}
+
+extension View {
+    func blueTitleStyle() -> some View {
+        self.modifier(BlueTitle())
+    }
+}
+
 // Custom modifiers can do much more than just apply other existing
 // modifiers – they can also create new view structure, as needed.
 // Remember, modifiers return new objects rather than modifying
@@ -139,6 +156,9 @@ struct ContentView: View {
             Color.blue
             .frame(width: 300, height: 100)
             .watermarked(with: "Watermark")
+            
+            Text("Test BlueTitle style")
+                .blueTitleStyle()
         }
     }
 }
